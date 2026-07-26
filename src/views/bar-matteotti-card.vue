@@ -4,15 +4,15 @@
 			<p class="editor-label">Editor (solo sviluppo)</p>
 			<label>
 				Nome e cognome affiliato
-				<input v-model="params.name" type="text" placeholder="..." />
+				<input v-model="name" type="text" placeholder="..." />
 			</label>
 			<label>
 				Ruolo
-				<input v-model="params.role" type="text" placeholder="..." />
+				<input v-model="role" type="text" placeholder="..." />
 			</label>
 			<label>
 				Codice
-				<input v-model="params.code" type="text" placeholder="..." />
+				<input v-model="code" type="text" placeholder="..." />
 			</label>
 		</aside>
 
@@ -28,27 +28,89 @@
 
 			<span class="team-name">TEAM RAPTUS</span>
 			<div class="affiliate-block">
-				<p class="line"><span class="label">AFFILIATO</span> {{ params.name }}</p>
-				<p class="line"><span class="label">RUOLO</span> {{ params.role }}</p>
-				<p class="line"><span class="label">CODICE</span> {{ params.code }}</p>
+				<p class="line"><span class="label">AFFILIATO</span> {{ name }}</p>
+				<p class="line"><span class="label">RUOLO</span> {{ role }}</p>
+				<p class="line"><span class="label">CODICE</span> {{ code }}</p>
 			</div>
 		</div>
 	</section>
 </template>
 
 <script setup lang="ts">
+import { computed } from 'vue'
 import { useUrlSearchParams } from '@vueuse/core'
 import Logo from '../components/logo.vue'
 
 const isDev = import.meta.env.DEV
 
-// Read the 3 editable values from the query string on load, and keep them in sync afterwards.
+interface CardData {
+	name: string
+	role: string
+	code: string
+}
+
+const DEFAULTS: CardData = { name: 'XXX', role: 'XXX', code: 'XXX' }
+
+// Fields are joined with "|" into a simple delimited text, then base64url-encoded,
+// so the query string only ever exposes one short "d" param instead of the raw values.
+const FIELD_SEPARATOR = '|'
+
+function sanitize(value: string): string {
+	return value.replaceAll(FIELD_SEPARATOR, ' ')
+}
+
+function encode(data: CardData): string {
+	const text = [data.name, data.role, data.code].map(sanitize).join(FIELD_SEPARATOR)
+	const bytes = new TextEncoder().encode(text)
+	let binary = ''
+	bytes.forEach(byte => binary += String.fromCharCode(byte))
+	return btoa(binary)
+		.replace(/\+/g, '-')
+		.replace(/\//g, '_')
+		.replace(/=+$/, '')
+}
+
+function decode(value: unknown): CardData {
+	if (typeof value !== 'string' || !value) return { ...DEFAULTS }
+	try {
+		const base64 = value.replace(/-/g, '+').replace(/_/g, '/')
+		const padded = base64 + '='.repeat((4 - base64.length % 4) % 4)
+		const bytes = Uint8Array.from(atob(padded), char => char.charCodeAt(0))
+		const [name, role, code] = new TextDecoder().decode(bytes).split(FIELD_SEPARATOR)
+		return {
+			name: name || DEFAULTS.name,
+			role: role || DEFAULTS.role,
+			code: code || DEFAULTS.code,
+		}
+	}
+	catch {
+		return { ...DEFAULTS }
+	}
+}
+
+// Single query string parameter, e.g. #/bar-matteotti-card?d=THVjYSBSb3NzaXxQaWxvdGE
 const params = useUrlSearchParams('hash', {
-	initialValue: {
-		name: 'XXX',
-		role: 'XXX',
-		code: 'XXX',
-	},
+	initialValue: { d: encode(DEFAULTS) },
+})
+
+// Read the encoded value from the query string first, exposed as 3 individually
+// editable fields that stay in sync with the "d" param whenever they change.
+const data = computed<CardData>({
+	get: () => decode(params.d),
+	set: value => { params.d = encode(value) },
+})
+
+const name = computed({
+	get: () => data.value.name,
+	set: (value: string) => { data.value = { ...data.value, name: value } },
+})
+const role = computed({
+	get: () => data.value.role,
+	set: (value: string) => { data.value = { ...data.value, role: value } },
+})
+const code = computed({
+	get: () => data.value.code,
+	set: (value: string) => { data.value = { ...data.value, code: value } },
 })
 </script>
 
