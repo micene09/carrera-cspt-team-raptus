@@ -36,7 +36,7 @@ export default defineComponent({
 		const primary = ref(isDark.value ? "#ffffff" : "#000000")
 		const bgColor = ref("transparent")
 		const format = ref<"PNG" | "SVG">("PNG")
-		const width = ref(760);
+		const width = ref(1000);
 		const height = ref(1000);
 		const repoUrl = ref("https://github.com/micene09/team-raptus-logo")
 		function getPresetObject(): Preset {
