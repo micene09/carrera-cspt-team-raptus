@@ -119,10 +119,15 @@ body > main.matteotti-card {
 	position: relative;
 	flex: 1 1 auto;
 	border-radius: 1.1rem;
-	border: 4px solid color-mix(in srgb, #fff 30%, transparent 70%);
+	border: 4px solid color-mix(in srgb, #fff 62%, transparent 38%);
 	background:
 		radial-gradient(circle at 30% 16%, rgba(255, 255, 255, .06), transparent 34%),
 		linear-gradient(180deg, rgba(122, 16, 33, .5), rgba(92, 12, 25, .55));
+	box-shadow:
+		inset 0 2px 0 rgba(255, 255, 255, .6),
+		inset 0 0 2.5rem rgba(255, 255, 255, .1),
+		inset 0 -1.5rem 2.5rem rgba(0, 0, 0, .18),
+		0 0 1.5rem rgba(255, 255, 255, .15);
 	overflow: hidden;
 	padding: clamp(1.25rem, 5vw, 2rem) 1rem;
 	display: flex;
@@ -130,14 +135,30 @@ body > main.matteotti-card {
 	align-items: center;
 	justify-content: center;
 	gap: clamp(1.5rem, 6vw, 2.75rem);
+
+	&::before {
+		content: "";
+		position: absolute;
+		inset: 0;
+		background: linear-gradient(160deg, rgba(255, 255, 255, .28) 0%, rgba(255, 255, 255, .08) 20%, transparent 40%);
+		mix-blend-mode: screen;
+		pointer-events: none;
+	}
 }
 
 .poster-shine {
 	position: absolute;
 	inset: 0;
 	pointer-events: none;
+	mix-blend-mode: screen;
 	background:
-		linear-gradient(135deg, transparent 4%, rgba(255, 255, 255, .55) 6% 7.4%, transparent 7.6% 10.4%, rgba(255, 255, 255, .3) 10.6% 11.6%, transparent 12%);
+		linear-gradient(135deg,
+			transparent 2%,
+			rgba(255, 255, 255, .95) 6% 7.6%,
+			rgba(255, 255, 255, .4) 7.8% 9.4%,
+			transparent 9.8% 13%,
+			rgba(255, 255, 255, .7) 13.2% 14.6%,
+			transparent 15%);
 }
 
 .brand-badge {
