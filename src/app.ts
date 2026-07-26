@@ -33,8 +33,8 @@ export default defineComponent({
 			valueDark: 'dark',
 			valueLight: 'light'
 		})
-		const primary = ref(isDark.value ? "#ffffff" : "#000000")
-		const bgColor = ref("transparent")
+		const primary = ref(isDark.value ? "#ffffff" : "#921f2f")
+		const bgColor = ref(isDark.value ? "#921f2f" : "#ffffff")
 		const format = ref<"PNG" | "SVG">("PNG")
 		const width = ref(1000);
 		const height = ref(1000);
@@ -73,37 +73,6 @@ export default defineComponent({
 				copiedTooltip.value = "Link copied"
 			}
 		}
-		async function onClickImport() {
-			const [handle] = await window.showOpenFilePicker({
-					multiple: false,
-					types: [{
-						description: "Team Raptus Logo Preset",
-						accept: { 'application/*': ['.json'] }
-					}]
-			})
-			if (handle.kind !== "file") return
-			const file = await handle.getFile()
-			const reader = new FileReader()
-			reader.readAsText(file)
-			reader.onload = function(){
-				const content = reader.result as string
-				try {
-					const preset: Preset = JSON.parse(content)
-					primary.value = preset.primary
-					bgColor.value = preset.bgColor
-				} catch {}
-			}
-		}
-		function onClickExport() {
-			const exportObj = getPresetObject()
-			const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(exportObj, undefined, "  "))
-			const anchor = document.createElement('a')
-			anchor.setAttribute("href", dataStr)
-			anchor.setAttribute("download", "team-raptus-logo.json")
-			document.body.appendChild(anchor)
-			anchor.click()
-			anchor.remove()
-		}
 		function onClickRandomColors() {
 			const colors = new ColorScheme()
 				.from_hue(Math.random() * 10000)
@@ -114,10 +83,16 @@ export default defineComponent({
 			bgColor.value = "#" + colors.at(-1)
 		}
 		function onThemeChange(theme: "dark" | "light") {
-			if (primary.value === "#ffffff" && theme === "light")
-				primary.value = "#000000"
-			if (primary.value === "#000000" && theme === "dark")
-				primary.value = "#ffffff"
+			if (theme === "light") {
+				if (bgColor.value === "#ffffff") {
+					primary.value = "#ffffff"
+					bgColor.value = "#921f2f"
+				}
+			}
+			else {
+				if (primary.value === "#921f2f" && theme === "dark")
+					bgColor.value = "#ffffff"
+			}
 		}
 
 		onMounted(() => {
@@ -148,8 +123,6 @@ export default defineComponent({
 			share,
 			copiedTooltip,
 			download,
-			onClickImport,
-			onClickExport,
 			onThemeChange
 		}
 	}

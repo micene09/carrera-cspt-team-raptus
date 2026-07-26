@@ -11,8 +11,6 @@
 		<ColorPicker label="Background" v-model="bgColor" />
 		<ColorPicker label="Primary" v-model="primary" />
 		<fieldset role="group">
-			<!-- <button class="outline" @click="onClickImport">Import</button>
-			<button class="outline" @click="onClickExport">Export</button> -->
 			<button class="outline" @click="onClickRandomColors">Random</button>
 			<button class="outline" :data-tooltip="copiedTooltip" @click="share">Share</button>
 		</fieldset>
