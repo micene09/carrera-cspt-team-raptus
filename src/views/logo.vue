@@ -119,8 +119,8 @@ export default defineComponent({
 			valueDark: 'dark',
 			valueLight: 'light'
 		})
-		const primary = ref(isDark.value ? "#ffffff" : "#921f2f")
-		const bgColor = ref(isDark.value ? "#921f2f" : "#ffffff")
+		const primary = ref(isDark.value ? "#ffffff" : "#691722")
+		const bgColor = ref(isDark.value ? "#691722" : "#ffffff")
 		const format = ref<"PNG" | "SVG">("PNG")
 		const width = ref(1000)
 		const height = ref(1000)
@@ -176,11 +176,11 @@ export default defineComponent({
 			if (theme === "light") {
 				if (bgColor.value === "#ffffff") {
 					primary.value = "#ffffff"
-					bgColor.value = "#921f2f"
+					bgColor.value = "#691722"
 				}
 			}
 			else {
-				if (primary.value === "#921f2f" && theme === "dark") {
+				if (primary.value === "#691722" && theme === "dark") {
 					bgColor.value = "#ffffff"
 				}
 			}

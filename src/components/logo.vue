@@ -10,8 +10,8 @@
 import { ref, computed } from "vue"
 
 const props = defineProps({
-  bgColor: { type: String, default: "#000000" },
-  primary: { type: String, default: "#33ffb5" }
+  bgColor: { type: String, default: "#921f2f" },
+  primary: { type: String, default: "#ffffff" }
 });
 const svg = ref(null);
 const styleTag = computed(() => {

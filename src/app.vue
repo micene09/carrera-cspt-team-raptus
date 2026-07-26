@@ -1,14 +1,19 @@
 <template>
-	<header id="title" class="title-bar">
-		<h3 class="title">Team Raptus App</h3>
-		<span class="tools">
-			<ThemeSwitch />
-			<GitHubRepo :href="repoUrl" class="contrast" />
-		</span>
-	</header>
-	<main>
-		<RouterView class="page"/>
-	</main>
+	<RouterView v-slot="{ Component, route }">
+		<header v-if="route.path !== '/bar-matteotti-card'" id="title" class="title-bar">
+			<h3 class="title">Team Raptus App</h3>
+			<span class="tools">
+				<ThemeSwitch />
+				<GitHubRepo :href="repoUrl" class="contrast" />
+			</span>
+		</header>
+		<main :class="{
+			page: route.path !== '/bar-matteotti-card',
+			'matteotti-card': route.path === '/bar-matteotti-card'
+		}">
+			<component :is="Component" />
+		</main>
+	</RouterView>
 </template>
 
 <script setup lang="ts">
