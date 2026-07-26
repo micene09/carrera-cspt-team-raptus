@@ -1,10 +1,10 @@
-import { createRouter, createWebHistory } from 'vue-router'
+import { createRouter, createWebHashHistory } from 'vue-router'
 import HomeView from '../views/home.vue'
 import LogoView from '../views/logo.vue'
 import BarMatteottiCardView from '../views/bar-matteotti-card.vue'
 
 const router = createRouter({
-	history: createWebHistory('/carrera-cspt-team-raptus/'),
+	history: createWebHashHistory('/carrera-cspt-team-raptus/'),
 	routes: [
 		{
 			path: '/',
