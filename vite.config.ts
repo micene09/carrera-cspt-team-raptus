@@ -9,7 +9,7 @@ export default defineConfig({
 		vue(),
 		vueDevTools(),
 	],
-	base: "/team-raptus-logo/",
+	base: "/carrera-cspt-team-raptus/",
 	server: { open: true },
 	resolve: {
 		alias: {

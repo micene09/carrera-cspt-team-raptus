@@ -44,7 +44,7 @@ jobs:
       cancel-in-progress: true
     environment:
       name: github-pages
-      url: https://github.com/micene09/team-raptus-logo
+      url: https://github.com/micene09/carrera-cspt-team-raptus
     steps:
       - name: deploy
         id: deployment

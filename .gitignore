@@ -4,6 +4,7 @@ logs
 npm-debug.log*
 pnpm-debug.log*
 lerna-debug.log*
+.npm-cache
 
 node_modules
 .DS_Store

@@ -1,85 +1,47 @@
 @use "@picocss/pico/scss/pico";
 body,
 body > main {
-	padding: 0;
 	padding-block: 0;
 }
-main, .page {
-	height: 100vh;
-	width: 100vw;
+body > main > section {
+	margin: 0;
+	gap: var(--pico-spacing);
+}
+body {
+	display: grid;
+	grid-template-areas:
+		"h h"
+		"b b";
+	grid-template-rows: max-content auto;
+}
+#title {
+	align-self: center;
+	grid-area: h;
+	display: grid;
+	grid-template-columns: 4fr 1fr;
+	gap: calc(var(--pico-spacing) / 1.5);
+	padding: var(--pico-spacing);
+	.title {
+		margin: 0;
+		text-align: left;
+		font-weight: 400;
+	}
+	.tools {
+		display: grid;
+		grid-template-columns: auto auto;
+		gap: calc(var(--pico-spacing) / 1.5);
+		align-items: center;
+		justify-content: end;
+	}
 }
 main {
 	overflow: hidden;
+	grid-area: b;
+	padding: 0 var(--pico-spacing);
 }
 .page {
 	overflow: auto;
-	display: grid;
 	gap: var(--pico-spacing);
-	grid-template-areas:
-		"t t"
-		"p p"
-		"f f";
-	grid-template-rows: max-content 20rem auto;
-	#title {
-		padding-top: var(--pico-spacing);
-		padding-left: var(--pico-spacing);
-		padding-right: var(--pico-spacing);
-		grid-area: t;
-		align-self: center;
-		display: grid;
-		grid-template-columns: 4fr 1fr;
-		.title {
-			margin: 0;
-			text-align: center;
-			font-weight: 400;
-		}
-		.tools {
-			display: grid;
-			grid-template-columns: auto auto;
-			gap: calc(var(--pico-spacing) / 1.5);
-			align-items: center;
-			justify-content: end;
-		}
-	}
-	#preview {
-		grid-area: p;
-		padding: var(--pico-spacing);
-		text-align: center;
-		> svg {
-			height: 100%;
-			width: 100%;
-		}
-		@media screen and (min-width: 900px) {
-			border: var(--pico-border-width) solid var(--pico-form-element-border-color);
-			border-radius: var(--pico-border-radius);
-		}
-	}
-	#form {
-		grid-area: f;
-		padding-left: var(--pico-spacing);
-		padding-right: var(--pico-spacing);
-	}
-	@media screen and (min-width: 900px) {
-		grid-template-areas:
-			"t t"
-			"f p";
-		grid-template-columns: 1fr 1fr;
-		grid-template-rows: max-content max-content;
-		padding: var(--pico-spacing);
-		#title, #form {
-			padding: 0;
-		}
-		#preview {
-			display: grid;
-			align-items: center;
-		}
-	}
-}
-#preview,
-.print-area {
-	padding: 4rem;
-	display: grid;
-	align-items: center;
 }
 /* width */
 ::-webkit-scrollbar {
