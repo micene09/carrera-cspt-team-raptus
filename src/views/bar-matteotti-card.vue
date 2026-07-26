@@ -4,15 +4,15 @@
 			<p class="editor-label">Editor (solo sviluppo)</p>
 			<label>
 				Nome e cognome affiliato
-				<input v-model="affiliateName" type="text" placeholder="..." />
+				<input v-model="params.name" type="text" placeholder="..." />
 			</label>
 			<label>
 				Ruolo
-				<input v-model="roleValue" type="text" placeholder="..." />
+				<input v-model="params.role" type="text" placeholder="..." />
 			</label>
 			<label>
 				Codice
-				<input v-model="codeValue" type="text" placeholder="..." />
+				<input v-model="params.code" type="text" placeholder="..." />
 			</label>
 		</aside>
 
@@ -28,28 +28,34 @@
 
 			<span class="team-name">TEAM RAPTUS</span>
 			<div class="affiliate-block">
-				<p class="line"><span class="label">AFFILIATO</span> {{ affiliateName }}</p>
-				<p class="line"><span class="label">RUOLO</span> {{ roleValue }}</p>
-				<p class="line"><span class="label">CODICE</span> {{ codeValue }}</p>
+				<p class="line"><span class="label">AFFILIATO</span> {{ params.name }}</p>
+				<p class="line"><span class="label">RUOLO</span> {{ params.role }}</p>
+				<p class="line"><span class="label">CODICE</span> {{ params.code }}</p>
 			</div>
 		</div>
 	</section>
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { useUrlSearchParams } from '@vueuse/core'
 import Logo from '../components/logo.vue'
 
-const isDev = !import.meta.env.DEV
-const affiliateName = ref('XXX')
-const roleValue = ref('XXX')
-const codeValue = ref('XXX')
+const isDev = import.meta.env.DEV
+
+// Read the 3 editable values from the query string on load, and keep them in sync afterwards.
+const params = useUrlSearchParams('hash', {
+	initialValue: {
+		name: 'XXX',
+		role: 'XXX',
+		code: 'XXX',
+	},
+})
 </script>
 
 <style lang="scss">
 :root {
-	--bordeaux: #6e0f1e;
-	--bordeaux-light: #7a1021;
+	--bordeaux: #590d18;
+	--bordeaux-light: #7a1122;
 	--pico-background-color: linear-gradient(180deg, var(--bordeaux-light) 0%, var(--bordeaux) 45%, #5c0c19 100%);
 }
 body > main.matteotti-card {
