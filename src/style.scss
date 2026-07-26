@@ -1,4 +1,15 @@
 @use "@picocss/pico/scss/pico";
+@font-face {
+	font-family: 'font-raptus';
+	src: url('./assets/font-raptus.ttf') format('truetype');
+	font-weight: normal;
+	font-style: normal;
+	font-display: swap;
+}
+.font-raptus {
+	font-family: 'font-raptus', sans-serif;
+	letter-spacing: .1em;
+}
 body,
 body > main {
 	padding-block: 0;

@@ -26,11 +26,11 @@
 				<Logo class="team-logo" bg-color="transparent" primary="white" />
 			</div>
 
-			<span class="team-name">TEAM RAPTUS</span>
+			<span class="team-name font-raptus">TEAM RAPTUS</span>
 			<div class="affiliate-block">
-				<p class="line"><span class="label">AFFILIATO</span> {{ name }}</p>
-				<p class="line"><span class="label">RUOLO</span> {{ role }}</p>
-				<p class="line"><span class="label">CODICE</span> {{ code }}</p>
+				<p class="line"><span class="label font-raptus">AFFILIATO</span> {{ name }}</p>
+				<p class="line"><span class="label font-raptus">RUOLO</span> {{ role }}</p>
+				<p class="line"><span class="label font-raptus">CODICE</span> {{ code }}</p>
 			</div>
 		</div>
 	</section>
@@ -245,7 +245,7 @@ body > main.matteotti-card {
 }
 .team-name {
 	text-align: center;
-	font-size: 1.5rem;
+	font-size: 1.8rem;
 	font-weight: 800;
 	color: white;
 }
@@ -257,13 +257,15 @@ body > main.matteotti-card {
 		color: white;
 	}
 	.line {
-		margin: 0 0 .5rem 0;
-		font-size: 1.2rem;
-		line-height: 1.5;
+		margin: 0 0 1rem 0;
+		font-size: 1.5rem;
+		font-weight: 300;
+		line-height: 1.3;
 		text-transform: uppercase;
 	}
 	.label {
 		font-size: 50%;
+		font-weight: 300;
 		display: block;
 	}
 }
