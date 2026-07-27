@@ -19,9 +19,8 @@
 		<div class="poster">
 			<div class="poster-frame">
 				<span class="poster-shine" aria-hidden="true"></span>
-				<!-- Placeholder for the sponsor bar logo: swap with the real artwork asset when available -->
 				<div class="brand-badge">
-					<Logo class="brand-badge-logo" bg-color="white" primary="#6e0f1e" />
+					<img src="/src/assets/logo-bar.jpeg" class="brand-badge-logo" alt="Bar Pasticceria Matteotti" />
 				</div>
 				<Logo class="team-logo" bg-color="transparent" primary="white" />
 			</div>
@@ -227,11 +226,9 @@ body > main.matteotti-card {
 	width: min(65%, 15rem);
 	aspect-ratio: 1;
 	border-radius: 50%;
-	background: white;
 	display: grid;
 	place-items: center;
-	padding: 12%;
-	box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--bordeaux) 25%, transparent 75%);
+	overflow: hidden;
 
 	.brand-badge-logo {
 		width: 100%;
