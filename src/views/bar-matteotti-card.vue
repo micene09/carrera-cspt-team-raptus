@@ -132,7 +132,7 @@ body > main.matteotti-card {
 	gap: var(--pico-spacing);
 	max-width: 84rem;
 	margin: 0 auto;
-	padding-block: var(--pico-spacing);
+	padding: 0;
 }
 
 .editor-panel {
