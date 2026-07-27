@@ -30,6 +30,7 @@
 				<p class="line"><span class="label font-raptus">AFFILIATO</span> {{ name }}</p>
 				<p class="line"><span class="label font-raptus">RUOLO</span> {{ role }}</p>
 				<p class="line"><span class="label font-raptus">CODICE</span> {{ code }}</p>
+				<p class="line small">Sconto 20% su tutto, fino al 30 Settembre 2026</p>
 			</div>
 		</div>
 	</section>
@@ -259,6 +260,12 @@ body > main.matteotti-card {
 		font-weight: 300;
 		line-height: 1.3;
 		text-transform: uppercase;
+
+		&.small {
+			font-size: .7rem;
+			font-weight: 300;
+			text-transform: none;
+		}
 	}
 	.label {
 		font-size: 50%;
